@@ -1,7 +1,7 @@
 version: "2"
 services:
     nginx:
-        container_name: nginx
+        container_name: sekiro-nginx
         image: lbbniu/nginx
         restart: always
         ports:
@@ -12,8 +12,10 @@ services:
             - ./logs:/lnmp/nginx/logs
         working_dir: /data/www/sina
         #entrypoint: ["nginx"]
-        links:
-            - sekiro:sekiro
+        #links:
+        #    - sekiro:sekiro
+        networks: 
+            - nsekiro
     sekiro:
         container_name: sekiro
         image: lbbniu/sekiro
@@ -23,3 +25,7 @@ services:
             - "5602"
         ports:
             - "5600:5600"
+        networks: 
+            - nsekiro
+networks: 
+    nsekiro:
